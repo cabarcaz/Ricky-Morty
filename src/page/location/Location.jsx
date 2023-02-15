@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import Card from '../../components/card/Card';
-import FilterEpisode from '../../components/filter/category/FilterEpisode';
+import React, { useState, useEffect } from "react";
+import Card from "../../components/card/Card";
+import FilterEpisode from "../../components/filter/category/FilterEpisode";
+import { Section, P, Text, Span } from "../../components/styled/StyledEpisodes";
 
 const Location = () => {
   let [results, updateResults] = useState([]);
@@ -11,7 +12,7 @@ const Location = () => {
   let api = `https://rickandmortyapi.com/api/location/${number}`;
 
   useEffect(() => {
-    (async function () {
+    (async function() {
       let data = await fetch(api).then((res) => res.json());
       updateInfo(data);
       let a = await Promise.all(
@@ -25,21 +26,25 @@ const Location = () => {
   }, [api]);
 
   return (
-    <div>
-      <p>Location : <span>{name === "" ? "Unknown" : name}</span> </p>
-      <p>Dimension: <span>{dimension === "" ? "Unknown" : dimension}</span> </p>
-      <p>Type: <span>{type === "" ? "Unknown" : type}</span></p>
+    <Text>
+      <P>
+        Location : <Span>{name === "" ? "Unknown" : name}</Span>{" "}
+      </P>
+      <P>
+        Dimension: <Span>{dimension === "" ? "Unknown" : dimension}</Span>{" "}
+      </P>
+      <P>
+        Type: <Span>{type === "" ? "Unknown" : type}</Span>
+      </P>
       <div>
-        <p>Pick Location</p>
+        <P>Pick Location</P>
         <FilterEpisode name="Location" changeId={updateNumber} total={126} />
       </div>
-      <div>
-        <div>
-          <Card page="/location/" results={results} />
-        </div>
-      </div>
-    </div>
+      <Section>
+        <Card page="/location/" results={results} />
+      </Section>
+    </Text>
   );
-}
+};
 
-export default Location
+export default Location;
