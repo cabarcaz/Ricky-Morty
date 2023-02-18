@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
 import styled from "styled-components";
+import { device } from "../../components/device/Device";
 import Search from "../../components/search/Search";
 import Filter from "../../components/filter/Filter";
 import Pagination from "../../components/pagination/Pagination";
@@ -17,7 +18,7 @@ const Home = () => {
   let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       let infoApi = await fetch(api).then((res) => res.json());
       updateFetchedInfoApi(infoApi);
     })();
@@ -35,30 +36,28 @@ const Home = () => {
     justify-content: space-between;
     gap: 16px;
     margin: 0 25px;
+    @media ${device.tablet} {
+      margin: auto 13px;
+      padding: auto;
+      justify-content: center;
+    }
+    @media ${device.mobileS} {
+      justify-content: center;
+    }
   `;
 
   return (
     <div>
       <Search updateSearch={updateSearch} updatePageNumber={updatePageNumber} />
-      <div className="flex flex-col text-xl">
-        <Filter
-          pageNumber={pageNumber}
-          status={status}
-          updateStatus={updateStatus}
-          updateGender={updateGender}
-          updateSpecies={updateSpecies}
-          updatePageNumber={updatePageNumber}
-        />
-        <Title>Characters</Title>
-        <Container>
-          <Card results={results} />
-        </Container>
-        <Pagination
-          info={info}
-          pageNumber={pageNumber}
-          updatePageNumber={updatePageNumber}
-        />
-      </div>
+      <Title>Characters</Title>
+      <Container>
+        <Card results={results} />
+      </Container>
+      <Pagination
+        info={info}
+        pageNumber={pageNumber}
+        updatePageNumber={updatePageNumber}
+      />
     </div>
   );
 };

@@ -4,10 +4,6 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-// import { Div, DivFilter, H2, H3 } from "../styled/StyleFilter";
-import Gender from "./category/Gender";
-import Species from "./category/Species";
-import Status from "./category/Status";
 
 const Filter = ({
   updatePageNumber,
